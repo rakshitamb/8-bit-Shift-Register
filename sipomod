@@ -1,0 +1,18 @@
+module sipomod(clk, clear, si, po);
+
+input clk, clear, si;
+output reg [3:0] po;
+
+reg [3:0] tmp;
+
+always @(posedge clk)
+begin
+    if (clear)
+        tmp <= 4'b0000;
+    else
+        tmp <= {tmp[2:0], si};   // shift left and insert serial input
+
+    po <= tmp;
+end
+
+endmodule

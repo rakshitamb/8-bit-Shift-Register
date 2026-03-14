@@ -1,0 +1,33 @@
+`timescale 1ns/1ps
+
+module shift_register_tb;
+
+reg clk;
+reg clken;
+reg SI;
+wire SO;
+
+shift_register uut (
+    .clk(clk),
+    .clken(clken),
+    .SI(SI),
+    .SO(SO)
+);
+
+always #5 clk = ~clk;
+
+initial
+begin
+    clk = 0;
+    clken = 1;
+    SI = 0;
+
+    #10 SI = 1;
+    #10 SI = 0;
+    #10 SI = 1;
+    #10 SI = 1;
+    #10 SI = 0;
+    #50 $finish;
+end
+
+endmodule
